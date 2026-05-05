@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu SAV – Berger-Levrault</title>
+	<link rel="stylesheet" href="../css/style_2.css">
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const sectionTitles = document.querySelectorAll(".section-title");
+    sectionTitles.forEach(title => {
+        title.addEventListener("click", () => {
+            const submenu = title.nextElementSibling;
+            if (submenu && submenu.classList.contains("submenu")) {
+                const displayStyle = submenu.style.display === "none" ? "block" : "none";
+                submenu.style.display = displayStyle;
+                // Sauvegarder l'état du menu dans le localStorage
+                localStorage.setItem(title.textContent, displayStyle);
+            }
+        });
+        // Charger l'état du menu depuis le localStorage
+        const savedDisplayStyle = localStorage.getItem(title.textContent);
+        if (savedDisplayStyle) {
+            const submenu = title.nextElementSibling;
+            if (submenu && submenu.classList.contains("submenu")) {
+                submenu.style.display = savedDisplayStyle;
+            }
+        }
+    });
+
+    const navItems = document.querySelectorAll("#menu li[data-page]");
+    const indicator = document.getElementById("indicator");
+
+    function moveIndicator(element) {
+        if (!indicator) return;
+        indicator.style.width = `${element.offsetWidth}px`;
+        indicator.style.left = `${element.offsetLeft}px`;
+        indicator.style.display = "block";
+    }
+
+    function hideIndicator() {
+        if (indicator) indicator.style.display = "none";
+    }
+
+    navItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+            const link = item.querySelector("a");
+            if (!link || !e.target.closest("a")) return;
+
+            document.querySelectorAll("#menu li.active").forEach(link => link.classList.remove("active"));
+            item.classList.add("active");
+            moveIndicator(item);
+            // Sauvegarder l'élément actif dans le localStorage
+            localStorage.setItem('activeMenuItem', item.getAttribute('data-page'));
+        });
+    });
+
+    // Charger l'élément actif depuis le localStorage
+    const activeMenuItem = localStorage.getItem('activeMenuItem');
+    if (activeMenuItem) {
+        const activeItem = document.querySelector(`#menu li[data-page="${activeMenuItem}"]`);
+        if (activeItem) {
+            activeItem.classList.add("active");
+            moveIndicator(activeItem);
+        }
+    } else {
+        const params = new URLSearchParams(window.location.search);
+        const page = params.get("page");
+        const activeItem = document.querySelector(`#menu li[data-page="${page}"]`);
+        if (activeItem) {
+            activeItem.classList.add("active");
+            moveIndicator(activeItem);
+        } else {
+            hideIndicator();
+        }
+    }
+
+    document.querySelector(".idee-haut").addEventListener("click", () => {
+        window.top.location.href = "../Pages_principales/boite_a_idee.html";
+    });
+});
+</script>
+
+
+</head>
+<body>
+<div id="sidebar">
+    <img id="logo" src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/images/logos/LogoBLDesktop.png" alt="Logo Berger-Levrault">
+    <div class="idee-haut">
+        💡<span>Une idée ? Clique ici !</span>
+    </div>
+    <nav id="menu">
+        <ul>
+            <li class="section-title">Page d'accueil</li>
+            <ul class="submenu" style="display: block;">
+                <li data-page="accueil"><a href="../Pages_principales/index.html" target="_top"><img src="../images/bouton_menu/bouton_accueil.png" alt="">Accueil</a></li>
+            </ul>
+            <hr>
+
+            <li class="section-title">Produits</li>
+            <ul class="submenu" style="display: none;">
+                <li data-page="actualites"><a href="../Pages_principales/actualites.html" target="_top"><img src="../Images/bouton_menu/bouton_actu.png" alt="">Actualités</a></li>
+                <li data-page="roadmap"><a href="../Pages_principales/roadmap.html" target="_top"><img src="../Images/bouton_menu/bouton_roadmap.png" alt="">Road Map PMC</a></li>
+                <li data-page="mots_cle"><a href="../Pages_principales/mots_cles.html" target="_top"><img src="../Images/bouton_menu/bouton_mots_cles.png" alt="">Mots clés</a></li>
+                <li data-page="wemagnus"><a href="../Pages_principales/wemagnus.html" target="_top"><img src="../Images/bouton_menu/bouton_perfectionnement.png" alt="">Mise en service WeGF</a></li>
+                <li data-page="migration_oracle"><a href="../Pages_principales/Migration_Oracle.html" target="_top"><img src="../Images/bouton_menu/bouton_jira.png" alt="">Migration Oracle 19C</a></li>
+            </ul>
+            <hr>
+
+            <li class="section-title">Templates</li>
+            <ul class="submenu" style="display: none;">
+                <li data-page="actions_sf"><a href="../Pages_principales/actions_sf.html" target="_top"><img src="../Images/bouton_menu/bouton_actions.png" alt="">Actions SF</a></li>
+                <li data-page="bonnes_pratiques"><a href="../Pages_principales/bonnes_pratiques.html" target="_top"><img src="../Images/bouton_menu/bouton_actions.png" alt="">Bonnes pratiques</a></li>				
+                <li data-page="jira"><a href="../Pages_principales/jira.html" target="_top"><img src="../Images/bouton_menu/bouton_jira.png" alt="">Jira</a></li>
+            </ul>
+            <hr>
+
+            <li class="section-title">Performance</li>
+            <ul class="submenu" style="display: none;">
+                <li data-page="tdb"><a href="../Pages_principales/tdb.html" target="_top"><img src="../Images/bouton_menu/bouton_tdb2.png" alt="">Tableau de bord</a></li>
+            </ul>
+            <hr>
+
+            <li class="section-title">Customer Care Academy</li>
+            <ul class="submenu" style="display: none;">
+                <li data-page="perfectionnement"><a href="../Pages_principales/perfectionnement.html" target="_top"><img src="../Images/bouton_menu/bouton_perfectionnement.png" alt="">Les rendez-vous Experts</a></li>
+                <li data-page="experquiz"><a href="../Pages_principales/Experquiz.html" target="_top"><img src="../Images/bouton_menu/bouton_liens.png" alt="">Experquiz</a></li>
+                <li data-page="memo_1"><a href="../Pages_principales/memo_1.html" target="_top"><img src="../Images/bouton_menu/bouton_memo.png" alt="">Structure d'appel</a></li>
+                <li data-page="memo_2"><a href="../Pages_principales/memo_2.html" target="_top"><img src="../Images/bouton_menu/bouton_memo2.png" alt="">Mémo</a></li>
+            </ul>
+            <hr>
+
+            <li class="section-title">Équipe & Organisation</li>
+            <ul class="submenu" style="display: none;">
+                <li data-page="pln"><a href="../Pages_principales/pln.html" target="_top"><img src="../Images/bouton_menu/bouton_pln.png" alt="">Planning</a></li>
+                <li data-page="referentes"><a href="../Pages_principales/referentes.html" target="_top"><img src="../Images/bouton_menu/bouton_pln.png" alt="">Référentes à Labège</a></li>				
+                <li data-page="meteo"><a href="../Pages_principales/meteo.html" target="_top"><img src="../Images/bouton_menu/bouton_equipe.png" alt="">Météo équipe</a></li>
+                <li data-page="Twist Days"><a href="../Pages_principales/hs.html" target="_top"><img src="../Images/bouton_menu/bouton_hs.png" alt="">BL Twist Days</a></li>
+                <li data-page="Permanence"><a href="../Pages_principales/no_permanence.html" target="_top"><img src="../Images/bouton_menu/bouton_permanence.png" alt="">Permanence</a></li>
+                <li data-page="liens"><a href="../Pages_principales/liens.html" target="_top"><img src="../Images/bouton_menu/bouton_liens.png" alt="">Liens utiles</a></li>
+                <li data-page="nps"><a href="../Pages_principales/nps_interne.html" target="_top"><img src="../Images/bouton_menu/bouton_actions.png" alt="">eNPS</a></li>				
+            </ul>
+        </ul>
+    </nav>
+</div>
+
+</body>
+</html>
