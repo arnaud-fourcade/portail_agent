@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de traitement des demandes</title>
+    <style>
+        body {
+            font-family: "Century Gothic", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: '#f2f2f2';
+        }
+        #sidebar {
+            width: 240px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #372E95;
+            padding: 20px;
+            color: white;
+        }
+        #logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        #menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        #menu ul li {
+            margin-bottom: 10px;
+        }
+        #menu ul li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            font-weight: bold;
+        }
+        #menu img {
+            max-width: 50px;
+            height: auto;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        #main-content {
+            margin-left: 300px;
+            padding: 20px;
+            display: none; /* Masquer par défaut */
+        }
+        #main-image {
+            width: 20%;
+            height: 20%;
+        }
+        .theme {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 20px;
+            color: white;
+            background-color: #372E95;
+            padding: 5px;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        .bold {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .highlight {
+            background-color: #372E95;
+            color: white;
+            font-weight: bold;
+            padding: 5px;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        #login {
+            margin: 100px auto;
+            width: 300px;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #fileInput, #generateHtmlButton {
+            display: none; /* Masquer par défaut */
+        }
+    </style>
+</head>
+<body>
+
+<div id="login">
+    <h2>Connexion</h2>
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password"><br><br>
+    <button onclick="checkPassword()">Se connecter</button>
+</div>
+
+<div id="sidebar">
+    <img id="logo" src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/LogoBLDesktop.png" alt="Logo">
+    <nav id="menu">
+        <ul>
+ <!-- Menu -->
+  <iframe src="../menu/sidebar_2.html?page=actions_sf" style="width: 280px; height: 100vh; border: none; position: fixed; top: 0; left: 0;"></iframe>
+        </ul>
+    </nav>
+</div>
+
+<div id="main-content">
+    <div style="margin-left: 0px; padding: 20px;">
+        <img id="main-image" src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Actu/Actualites_2.jpg" alt="Actualités">
+    </div>
+
+    <div style="margin-left: 0px; padding: 20px;">
+        <h1>Actualités</h1>
+        <input type="file" id="fileInput" accept=".xlsx">
+        <button id="generateHtmlButton">Générer et télécharger la page HTML</button>
+        <div id="newsContainer"></div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+    function checkPassword() {
+        const correctPassword = 'test'; // Remplacez par le mot de passe réel
+        const enteredPassword = document.getElementById('password').value;
+        if (enteredPassword === correctPassword) {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('sidebar').style.display = 'block';
+            document.getElementById('main-content').style.display = 'block';
+
+            // Affichez les boutons de fichier et de génération
+            document.getElementById('fileInput').style.display = 'block';
+            document.getElementById('generateHtmlButton').style.display = 'block';
+        } else {
+            alert('Mot de passe incorrect !');
+        }
+    }
+
+    document.getElementById('fileInput').addEventListener('change', handleFile, false);
+    document.getElementById('generateHtmlButton').addEventListener('click', generateAndDownloadHtml, false);
+
+    let jsonData = [];
+
+    function handleFile(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const data = new Uint8Array(event.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            jsonData = XLSX.utils.sheet_to_json(worksheet);
+            generateNews(jsonData);
+        };
+        reader.readAsArrayBuffer(file);
+    }
+
+    function generateNews(data) {
+        const newsContainer = document.getElementById('newsContainer');
+        newsContainer.innerHTML = '';
+
+        const groupedData = data.reduce((acc, item) => {
+            const theme = item['Thème'];
+            if (!acc[theme]) {
+                acc[theme] = [];
+            }
+            acc[theme].push(item);
+            return acc;
+        }, {});
+
+        Object.keys(groupedData).forEach(theme => {
+            const themeDiv = document.createElement('div');
+            themeDiv.classList.add('theme');
+            themeDiv.textContent = theme;
+
+            const themeNews = groupedData[theme].map(item => {
+                const title = item['Titre'];
+                let date;
+                if (typeof item['Date'] === 'number') {
+                    const excelDate = new Date(Math.round((item['Date'] - 25569) * 86400 * 1000));
+                    date = excelDate.toLocaleDateString('fr-FR');
+                } else {
+                    date = new Date(item['Date']).toLocaleDateString('fr-FR');
+                }
+
+                const link = item['Lien'];
+                return `<p><span class="bold">${title} (${date}) : </span><a href="${link}">Ici</a></p>`;
+            }).join('');
+
+            newsContainer.appendChild(themeDiv);
+            newsContainer.innerHTML += themeNews;
+        });
+    }
+
+    function generateAndDownloadHtml() {
+        const newsHtml = document.getElementById('newsContainer').innerHTML;
+        const htmlContent = `
+          <!DOCTYPE html>
+          <html lang="fr">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Actualités générées</title>
+              <style>
+                  body {
+                      font-family: "Century Gothic", sans-serif;
+                      margin: 0;
+                      padding: 0;
+                      background-color: #f2f2f2;
+                  }
+                  #sidebar {
+                      width: 240px;
+                      height: 100%;
+                      position: fixed;
+                      top: 0;
+                      left: 0;
+                      background-color: #372E95;
+                      padding: 20px;
+                      color: white;
+                  }
+                  #logo {
+                      max-width: 200px;
+                      height: auto;
+                      margin-bottom: 20px;
+                  }
+                  #menu ul {
+                      list-style-type: none;
+                      margin: 0;
+                      padding: 0;
+                  }
+                  #menu ul li {
+                      margin-bottom: 10px;
+                  }
+                  #menu ul li a {
+                      text-decoration: none;
+                      color: white;
+                      display: block;
+                      font-weight: bold;
+                  }
+                  #menu img {
+                      max-width: 50px;
+                      height: auto;
+                      margin-right: 10px;
+                      vertical-align: middle;
+                  }
+                  #main-content {
+                      margin-left: 300px;
+                      padding: 20px;
+                  }
+                  .theme {
+                      font-weight: bold;
+                      font-size: 20px;
+                      margin-top: 20px;
+                      color: #372E95;
+                      background-color: #f2f2f2;
+                      padding: 5px;
+                      display: inline-block;
+                      border-radius: 5px;
+                  }
+                  .bold {
+                      font-weight: bold;
+                      text-decoration: underline;
+                  }
+                  .highlight {
+                      background-color: #372E95;
+                      color: #f2f2f2;
+                      font-weight: bold;
+                      padding: 5px;
+                      display: inline-block;
+                      border-radius: 5px;
+                  }
+              </style>
+          </head>
+          <body>
+              <div id="sidebar">
+                  <img id="logo" src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/logos/LogoBLDesktop.png" alt="Logo">
+                  <nav id="menu">
+                      <ul>
+                          <li><a href="index.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_actu.png" alt="Actualités">Actualités</a></li>
+                          <li><a href="tdb.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_tdb2.png" alt="Tableau de bord">Tableau de bord</a></li>
+                          <li><a href="actions_sf.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_actions.png" alt="Actions SF">Actions SF</a></li>
+                          <li><a href="jira.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_jira.png" alt="Jira">Jira</a></li>
+                          <li><a href="pln.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_pln.png" alt="Planning">Planning</a></li>
+                          <li><a href="no_hs.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_hs.png" alt="Heures sup">BL Twist Days</a></li>
+                          <li><a href="no_permanence.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_permanence.png" alt="Heures sup">Permanence</a></li>
+                          <li><a href="liens.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_liens.png" alt="Liens utiles">Liens utiles</a></li>
+                          <li><a href="perfectionnement.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_perfectionnement.png" alt="Ateliers de perfectionnement">Les Rencontres Experts</a></li>
+                          <li><a href="mots_cles.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_mots_cles.png" alt="Mots clés">Mots clés</a></li>
+                          <br><br><br><br><br><br><br><br><br><br><br><br>
+                          <li><a href="Coordinateur_actu.html"><img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Images/bouton_menu/bouton_actu.png" alt="Tableau de bord">Actu Coordinateur</a></li>
+                      </ul>
+                  </nav>
+              </div>
+              <div id="main-content">
+                  <div style="margin-left: 300px; padding: 20px;">
+                      <h1>Actualités</h1>
+                      ${newsHtml}
+                  </div>
+              </div>
+          </body>
+          </html>
+        `;
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'actualites.html';
+        link.click();
+    }
+</script>
+
+</body>
+</html>
