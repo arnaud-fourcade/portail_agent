@@ -1,0 +1,152 @@
+        /* Les styles CSS restent inchangés */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+/* Styles pour le menu dans le fichier CSS */
+#sidebar {
+    width: 270px;
+    height: 100%;
+    background: linear-gradient(160deg, #372E95 65%, #3A78B0 100%);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur */
+}
+
+#logo {
+    width: 120px;
+    margin: 0 auto 28px 0;
+    display: flex;
+}
+
+.idee-haut {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 12px;
+    margin: -10px 8px 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.idee-haut:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.section-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    margin: 5px 0 5px;
+    padding-left: 8px;
+    letter-spacing: 0.6px;
+    cursor: pointer;
+}
+
+.submenu {
+    margin: 0;
+    padding-left: 15px;
+}
+
+hr {
+    margin: -5px 0px 20px;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#menu {
+    margin-top: 5px;
+}
+
+#menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu ul li {
+    margin-bottom: 6px;
+    position: relative;
+}
+
+#menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    line-height: 1.4;
+    min-height: 10px;
+}
+
+#menu ul li a:hover,
+#menu ul li a:focus-visible {
+    background-color: rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+#menu img {
+    height: 30px;
+    width: 30px;
+    margin-right: 12px;
+    object-fit: contain;
+    display: block;
+}
+
+#menu ul li.active::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #FFD700;
+    border-radius: 3px 0 0 3px;
+}
+
+#menu ul li.active a {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+#menu ul li a:focus-visible {
+    outline: 2px solid #FFD700;
+    outline-offset: 2px;
+}
+
+/* Sous-menu de la roadmap (niveau 2) */
+.roadmap-submenu {
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.roadmap-submenu li a {
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Assurez-vous que l'iframe a une largeur et une hauteur appropriées */
+iframe {
+    width: 270px; /* Correspond à la largeur de la sidebar */
+    height: 100%;
+    border: none;
+}

@@ -1,0 +1,180 @@
+/* Style général */
+body {
+    font-family: 'Century Gothic', sans-serif;
+    background-color: #e1edf2;
+    margin: 0;
+    padding: 0;
+}
+
+h1.title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin: 20px 0;
+}
+
+.service-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.service-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.service-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 200px;
+    transition: transform 0.3s ease;
+}
+
+.service-card input:disabled,
+.service-card button:disabled {
+    cursor: not-allowed;
+}
+
+/* Grisé après réservation */
+.service-card.grayed {
+    background-color: #d3d3d3;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.service-info {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+/* Espacer N° Ticket */
+label {
+    display: block; /* Pour que le label occupe toute la largeur disponible */
+    margin-bottom: 5px; /* Ajoute un petit espace entre le libellé et l'input */
+    font-size: 1rem; /* Taille de police du libellé */
+    color: #333; /* Couleur du libellé */
+}
+
+/* Espacer l'input du bouton réserver */
+.ticket-input {
+    margin-bottom: 15px; /* Espace entre l'input et le bouton */
+    padding: 10px;
+    width: calc(100% - 22px); /* Pour ajuster à la largeur du parent, moins les marges */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style pour le bouton réserver */
+.btn-reserve {
+    background-color: #495d63;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-reserve:hover {
+    background-color: #35474d;
+}
+
+/* Style pour griser les éléments désactivés */
+input:disabled,
+button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* Optionnel : Griser la carte de service (ticket) */
+.service-card.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Ajout pour centrer et styliser le cadre de commentaire */
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+textarea#user-comment {
+    width: 80%;
+    padding: 10px;
+    border-radius: 15px; /* Bordure arrondie */
+    border: 2px solid #ccc;
+    font-family: 'Century Gothic', sans-serif; /* Police Century Gothic */
+    font-size: 16px;
+    resize: none; /* Désactive le redimensionnement */
+}
+
+button.btn-send-comment {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #495d63; /* Couleur pour le bouton */
+    color: white;
+    border: none;
+    border-radius: 10px; /* Bordure arrondie */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button.btn-send-comment:hover {
+    background-color: #35474d; /* Couleur légèrement plus foncée au survol */
+}
+
+.average-rating-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 25px;
+    font-family: 'Arial', sans-serif;
+}
+
+.average-rating {
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    background-color: #495d63;
+    padding: 20px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
