@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logigramme WeGF</title>
+<style>
+  body {
+    font-family: "Century Gothic", sans-serif;
+    margin: 0; /* Supprimer les marges par défaut du corps de la page */
+    padding: 0; /* Supprimer les espacements internes par défaut */
+    background-color: #f2f2f2; /* Couleur de fond de la page */
+  }
+
+</style>
+</head>
+<body>
+
+  <iframe src="../menu/sidebar_2.html?page=roadmap" style="width: 280px; height: 100vh; border: none; position: fixed; top: 0; left: 0;"></iframe>
+
+<!-- Contenu principal (exemple) -->
+<div style="margin-left: 300px; padding: 20px;"> <!-- Ajoute une marge à gauche pour laisser de l'espace pour le bandeau latéral -->
+
+  <h1>WeGF - De la commande à la livraison : les étapes successives</h1>
+
+<!-- Ajout de l'iframe pour afficher le fichier PPT converti en HTML -->
+<iframe src="file://///Berger-levrault\Labege\DAC\DAC\Site_PMC\documents\wemagnus\logigramme_we.pdf" width="100%" height="800px" frameborder="0"></iframe>
+<script>
+    // tracking
+	
+  fetch('http://10.31.210.23:8450/log', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    page: window.location.pathname.split('/').pop()
+  })
+});
+</script>
+
+</body>
+</html>
