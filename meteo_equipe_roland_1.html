@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Météo équipe</title>
+    <link rel="stylesheet" href="../css/style_V2.css">
+	
+		
+</head>
+<body>
+
+    <h1 class="title">L’enthousiasme est contagieux. Cultivons-le chaque jour pour réussir ensemble</h1><h1 class="title"></h1>
+
+	
+    <div class="container">
+
+    <div class="service-container">
+	
+        <!-- Ticket 1 -->
+        <div class="service-card" id="5">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_31/image_5.png" alt="Image Ticket 5" class="service-img">
+             <h3>J.SINNER<br>(5)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(5)">Voter</button>
+        </div>
+	
+        <!-- Ticket 2 -->
+        <div class="service-card" id="4">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_31/image_4.png" alt="Image Ticket 4" class="service-img">
+             <h3>N.DJOKOVIC<br>(4)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(4)">Voter</button>
+        </div>
+
+        <!-- Ticket 3 -->
+        <div class="service-card" id="3">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_31/image_3.png" alt="Image Ticket 3" class="service-img">
+             <h3>A.FILS<br>(3)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(3)">Voter</button>
+        </div>
+
+        <!-- Ticket 4 -->
+        <div class="service-card" id="2">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_31/image_2.png" alt="Image Ticket 2" class="service-img">
+             <h3>D.MEDVEDEV<br>(2)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(2)">Voter</button>
+        </div>
+
+        <!-- Ticket 5 -->
+        <div class="service-card" id="1">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_31/image_1.png" alt="Image Ticket 1" class="service-img">
+             <h3>C.ALCARZA<br>(1)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(1)">Voter</button>
+        </div>
+    </div>
+
+<br>
+
+<div style="text-align: center; margin-top: 20px;">
+    <p><strong>,À l’image des joueurs de Roland-Garros, choisis ton état d’esprit cette semaine selon ton joueur préféré : entre échanges intenses et balles de break, chacun avance à son rythme vers la victoire ! 🎾️</strong></p><br>
+
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+<div><strong>🏆<br>5 - Jannik SINNER</strong><br><span style="font-size: 0.9em;">Grandissime favori, tout semble dérouler parfaitement !</span></div>
+<div><strong>💪<br>4 - Novak DJOKOVIC</strong><br><span style="font-size: 0.9em;">Solide et expérimenté, je gère les moments clés !</span></div>
+<div><strong>🔥<br>3 - Arthur FILS</strong><br><span style="font-size: 0.9em;">En pleine progression, prêt à faire vibrer le public !</span></div>
+<div><strong>🎯<br>2 - Daniil MEDVEDEV</strong><br><span style="font-size: 0.9em;">Un peu irrégulier(ère), mais toujours capable de surprendre !</span></div>
+<div><strong>🚑<br>1 - Carlos ALCARAZ</strong><br><span style="font-size: 0.9em;">Forfait… je récupère avant de revenir plus fort !</span></div>
+    </div>
+<br>
+
+</div>
+
+
+<!-- Conteneur pour le message après le vote ou l'envoi de commentaire -->
+<div id="vote-message" style="display: none; margin-top: 20px; font-weight: bold; color: #333; text-align: center;">
+    <!-- Le message s'affichera ici après le vote ou l'envoi de commentaire -->
+</div>
+
+<!-- Zone de saisie pour le commentaire, avec le bouton Envoyer -->
+<div class="comment-section">
+
+    <textarea id="user-comment" rows="4" cols="50" placeholder="Exprimez vos idées, suggestions ou retours ici..."></textarea><br>
+    <button class="btn-send-comment" onclick="sendComment()">Envoyer</button>
+</div>
+
+<!-- Section de la note moyenne -->
+<div class="average-rating-container" id="average-rating-container">
+    <h2>Note moyenne de l'équipe</h2>
+    <div id="average-rating" class="average-rating"></div>
+</div>
+
+
+    <script src="script/meteo.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Météo équipe</title>
+    <link rel="stylesheet" href="../css/style_V2.css">
+	
+		
+</head>
+<body>
+
+    <h1 class="title">L’enthousiasme est contagieux. Cultivons-le chaque jour pour réussir ensemble</h1><h1 class="title"></h1>
+
+	
+    <div class="container">
+
+    <div class="service-container">
+	
+        <!-- Ticket 1 -->
+        <div class="service-card" id="5">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_32/image_5.png" alt="Image Ticket 5" class="service-img">
+             <h3>A.SABALENKA<br>(5)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(5)">Voter</button>
+        </div>
+	
+        <!-- Ticket 2 -->
+        <div class="service-card" id="4">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_32/image_4.png" alt="Image Ticket 4" class="service-img">
+             <h3>C.GAUFF<br>(4)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(4)">Voter</button>
+        </div>
+
+        <!-- Ticket 3 -->
+        <div class="service-card" id="3">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_32/image_3.png" alt="Image Ticket 3" class="service-img">
+             <h3>N.OSAKA<br>(3)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(3)">Voter</button>
+        </div>
+
+        <!-- Ticket 4 -->
+        <div class="service-card" id="2">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_32/image_2.png" alt="Image Ticket 2" class="service-img">
+             <h3>L.BOISSON<br>(2)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(2)">Voter</button>
+        </div>
+
+        <!-- Ticket 5 -->
+        <div class="service-card" id="1">
+             <img src="file://///Berger-levrault/Labege/DAC/DAC/Site_PMC/Meteo_equipe/images_vote/jeu_32/image_1.png" alt="Image Ticket 1" class="service-img">
+             <h3>E.RADUCANU<br>(1)</h3>
+             <button class="btn-reserve" onclick="reserveTicket(1)">Voter</button>
+        </div>
+    </div>
+
+<br>
+
+<div style="text-align: center; margin-top: 20px;">
+    <p><strong>,À l’image des joueuses de Roland-Garros, choisis ton état d’esprit cette semaine selon ta joueuse préférée : entre échanges intenses et balles de break, chacune avance à son rythme vers la victoire ! 🎾️</strong></p><br>
+
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+<div><strong>🏆<br>5 - Aryna SABALENKAR</strong><br><span style="font-size: 0.9em;">Puissante et dominante, je prends le contrôle !</span></div>
+<div><strong>💪<br>4 - Coco GAUFF</strong><br><span style="font-size: 0.9em;">Solide et appliquée, je garde le cap !</span></div>
+<div><strong>🔥<br>3 - Naomi OSAKA</strong><br><span style="font-size: 0.9em;">En retour au premier plan, prête à faire la différence !</span></div>
+<div><strong>🎯<br>2 - Lois BOISSON</strong><br><span style="font-size: 0.9em;">En progression, je saisis chaque opportunité !</span></div>
+<div><strong>🩹<br>1 - Emma RADUCANU</strong><br><span style="font-size: 0.9em;">Besoin de reprendre confiance… mais toujours dans le match !</span></div>
+    </div>
+<br>
+
+</div>
+
+
+<!-- Conteneur pour le message après le vote ou l'envoi de commentaire -->
+<div id="vote-message" style="display: none; margin-top: 20px; font-weight: bold; color: #333; text-align: center;">
+    <!-- Le message s'affichera ici après le vote ou l'envoi de commentaire -->
+</div>
+
+<!-- Zone de saisie pour le commentaire, avec le bouton Envoyer -->
+<div class="comment-section">
+
+    <textarea id="user-comment" rows="4" cols="50" placeholder="Exprimez vos idées, suggestions ou retours ici..."></textarea><br>
+    <button class="btn-send-comment" onclick="sendComment()">Envoyer</button>
+</div>
+
+<!-- Section de la note moyenne -->
+<div class="average-rating-container" id="average-rating-container">
+    <h2>Note moyenne de l'équipe</h2>
+    <div id="average-rating" class="average-rating"></div>
+</div>
+
+
+    <script src="script/meteo.js"></script>
+</body>
+</html>

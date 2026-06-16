@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accueil</title>
+<style>
+  body {
+    font-family: "Century Gothic", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #ffff99;
+    display: inline;
+  }
+
+  p {
+    font-size: 24px;
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .red {
+    color: red;
+  }
+
+  #main-image {
+    width: 20%;
+    height: 20%;
+  }
+
+  /* Style de la popup */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 15px;
+    border-radius: 10px;
+    width: 60%;
+    max-width: 1000px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .close {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover {
+    color: red;
+  }
+
+  .modal a {
+    font-weight: bold;
+    color: #0066cc;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<!-- Popup Météo -->
+<div id="popup" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('popup').style.display='none'">&times;</span>
+    <h2>🌦️ Météo d’Équipe : On prend la température !</h2>
+    <p>🚨 Nous lançons la page <strong>Météo d’Équipe</strong> pour mieux comprendre l’humeur et le ressenti de chacun 💬</p>
+    <p>💡 <strong>Pourquoi ?</strong> Rien d'obligatoire, toutefois vos ressentis comptent — c’est comme ça qu’on peut mieux travailler ENSEMBLE 🙌</p>
+    <p>🧭 <strong>L’objectif :</strong> créer un espace simple et bienveillant pour partager son humeur du moment, en 1 clic ✅</p>
+    <p>👉 C’est dispo dès maintenant ici : <a href="meteo.html">meteo equipe</a></p>
+    <p>Alors, quelle est la carte météo de la Team aujourd'hui ? 🌞🌧️ Lance-toi ! 💙</p>
+  </div>
+</div>
+
+<!-- Script pour afficher la popup -->
+<script>
+  window.onload = function() {
+    document.getElementById("popup").style.display = "block";
+  };
+</script>
+
+<!-- Menu -->
+<iframe src="../menu/sidebar_2.html?page=accueil" style="width: 280px; height: 100vh; border: none; position: fixed; top: 0; left: 0;"></iframe>
+
+<!-- Contenu principal -->
+<div style="margin-left: 300px; padding: 20px;">
+  <h1>Bienvenue sur ton portail agent !</h1>
+  <img id="main-image" src="../images/accueil2.JPG" alt="accueil">
+
+  <div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 100%;">
+    <h2>🎉 Découvre le nouveau Portail Agent : ton accès central d'information et de performance ! 🔍</h2>
+
+    <h3>
+      Nous sommes ravis de te présenter le <strong>nouveau Portail Agent</strong>.<br>
+      Il a été pensé pour te simplifier la vie au quotidien et t'offrir une vision claire, centralisée et actualisée de tout ce qui compte dans notre métier.
+    </h3>
+
+    <h3>🔑 Ce que tu y trouveras :</h3>
+    <ul>
+      <li>📰 <strong>Des actualités produits</strong> en temps réel pour rester informé(e) des dernières évolutions</li>
+      <li>📆 <strong>Les roadmaps logicielles</strong> pour anticiper les nouveautés à venir</li>
+      <li>🔗 <strong>Un accès rapide</strong> à tous les liens utiles et aux outils essentiels</li>
+      <li>🤝 <strong>Une porte d’entrée</strong> vers la customer care academy et notamment ses rencontres avec nos experts et des contenus exclusifs</li>
+      <li>📚 <strong>Toute la documentation métier</strong> réunie en un seul endroit</li>
+      <li>📊 <strong>Tes tableaux de bord d’activité</strong> pour piloter tes actions en toute autonomie</li>
+      <li>📁 <strong>Des modèles prêts à l’emploi</strong> pour gagner du temps au quotidien</li>
+    </ul>
+
+    <p>
+      💡 Que tu sois à la recherche d'une information, d'une ressource ou d'une inspiration, le <strong>Portail Agent</strong> est là pour t'accompagner à chaque étape.
+    </p>
+  </div>
+</div>
+
+<script>
+ 
+    // tracking
+	
+  fetch('http://10.31.210.23:8450/log', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    page: window.location.pathname.split('/').pop()
+  })
+});
+ 
+
+</script>
+
+</body>
+</html>
